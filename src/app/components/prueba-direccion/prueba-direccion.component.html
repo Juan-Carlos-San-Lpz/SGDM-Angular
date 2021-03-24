@@ -1,0 +1,26 @@
+<form #direccion="ngForm">
+
+  <select name="estado" #estado="ngModel" [(ngModel)]="direccion.estado" (change)="onMunicipio(estado)">
+
+    <option [value]="estado" *ngFor="let estado of dataEstado">{{estado}}</option>
+  </select>
+
+  <select name="municipio" #municipio="ngModel" [(ngModel)]="direccion.municipio" (change)="onCP(municipio)">
+
+    <option [value]="municipio" *ngFor="let municipio of dataMunicipio">{{municipio}}
+    </option>
+  </select>
+
+  <select name="cp" #cp="ngModel" [(ngModel)]="direccion.cp" (change)="onColonia(cp)">
+
+    <option [value]="cp" *ngFor="let cp of dataCp">{{cp}}
+    </option>
+  </select>
+
+  <select name="colonia" #colonia="ngModel" [(ngModel)]="direccion.colonia">
+
+    <option [value]="colonia" *ngFor="let colonia of dataColonia">{{colonia}}
+    </option>
+  </select>
+
+</form>

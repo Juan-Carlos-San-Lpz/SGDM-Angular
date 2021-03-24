@@ -1,0 +1,157 @@
+      <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="../../index3.html" class="brand-link">
+          <img src="../../../assets/img/rootlogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8">
+          <span class="brand-text font-weight-light">BAKKI HEIM</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <!-- Sidebar user (optional) -->
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="{{url + '/usuario/avatar/' + identity.image}}" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+              <a [routerLink]="['/perfil']" class="d-block">{{identity.nombre_usuario}}</a>
+            </div>
+          </div>
+
+          <!-- Sidebar Menu -->
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+              <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+              <li class="nav-item has-treeview menu-open">
+                <a [routerLink]="['/usuarios']" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    Usuarios
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [routerLink]="['/grupos']" class="nav-link">
+                  <i class="nav-icon fas fa-guitar"></i>
+                  <p>
+                    Grupos Musicales
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item has-treeview">
+                <a [routerLink]="['/genero-musical']" class="nav-link">
+                  <i class="nav-icon fas fa-microphone-alt"></i>
+                  <p>
+                    Genero Musical<i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item" *ngFor="let genero of generos">
+                    <a href="../tables/simple.html" class="nav-link">
+                      <i class="nav-icon fas fa-headphones-alt"></i>
+                      <p>{{genero.nombre_genero}}</p>
+                    </a>
+                  </li>
+
+                </ul>
+              </li>
+
+              <li class="nav-item">
+                <a [routerLink]="['/menus']" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    Menus
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [routerLink]="['/permisos']" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    Permisos
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [routerLink]="['/submenu']" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    SubMenu
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [routerLink]="['/permisos/submenu']" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    Permisos-SubMenu
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [routerLink]="['/pedido']" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    Pedido
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [routerLink]="['/detalle/pedido']" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    Detalle Pedido
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [routerLink]="['/status/pedido']" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    Status Pedido
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [routerLink]="['/promosion/grupo']" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    Promosion Grupo
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [routerLink]="['/tarjeta']" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    Tarjeta
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [routerLink]="['/tipo/usuario']" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    Tipo Usuario
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a [routerLink]="['/fecha/pago']" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    Fecha Pago
+                  </p>
+                </a>
+              </li>
+
+
+            </ul>
+          </nav>
+          <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+      </aside>

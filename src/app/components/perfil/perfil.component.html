@@ -1,0 +1,242 @@
+<menu></menu>
+  <barralateral></barralateral>
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Perfil</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Blank Page</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+<div class="container">
+
+         <div class="col-md-12">
+            <!-- Widget: user widget style 1 -->
+            <div class="card card-widget widget-user">
+              <!-- Add the bg color to the header using any of the bg-* classes -->
+              <div class="widget-user-header bg-info">
+                <h3 class="widget-user-username">{{identity.nombre_usuario}}</h3>
+                <h5 class="widget-user-desc">{{identity.appat_usuario +' '+ identity.appat_usuario}}</h5>
+              </div>
+              <div class="widget-user-image">
+                <img class="img-circle elevation-2" src="{{url + '/usuario/avatar/' + identity.image}}" alt="User Avatar">
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col-sm-4 border-right">
+                    <div class="description-block">
+                      <h5 class="description-header">3,200</h5>
+                      <span class="description-text">SALES</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-4 border-right">
+                    <div class="description-block">
+                      <h5 class="description-header">13,000</h5>
+                      <span class="description-text">FOLLOWERS</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-4">
+                    <div class="description-block">
+                      <h5 class="description-header">35</h5>
+                      <span class="description-text">PRODUCTS</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </div>
+            </div>
+            <!-- /.widget-user -->
+          </div>
+
+        <div class="card-body pb-0">
+          <div class="row d-flex align-items-stretch">
+
+          <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+              <div class="card bg-light">
+                <div class="card-header text-muted border-bottom-0">
+                  Comntacto
+                </div>
+                <div class="card-body pt-0">
+                  <div class="row">
+                    <div class="col-7">
+                      <h2 class="lead"><b>{{identity.nombre_usuario}}</b></h2>
+                      <p class="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p>
+                      <ul class="ml-4 mb-0 fa-ul text-muted">
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: Demo Street 123, Demo City 04312, NJ</li>
+                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> {{identity.tel_usuario}}</li>
+                      </ul>
+                    </div>
+                    <div class="col-5 text-center">
+                      <img src="{{url + '/usuario/avatar/' + identity.image}}"  alt="" class="img-circle img-fluid">
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          <div class="col-12 col-sm-6 col-md-8 d-flex align-items-stretch">
+              <div class="card bg-light">
+                <div class="card-header text-muted border-bottom-0">
+                  Editar Información
+                </div>
+                <div class="card-body pt-0">
+          <form #detalleForm="ngForm" (ngSubmit)="onSubmit(detalleForm)">
+            <div class="row mt-3">
+
+              <div class="input-group mb-3 col-md-6 col-sm-12">
+                <input type="hidden" class="form-control" placeholder="id" name="id" #id="ngModel" [(ngModel)]="identity.id_usuario" >
+                <input type="text" class="form-control" placeholder="Nombre" name="nombre" #nombre="ngModel" [(ngModel)]="identity.nombre_usuario" required pattern="[a-zA-Z]+">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+                <small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">EL nombre no es válido</small>
+              </div>
+              <div class="input-group mb-3 col-md-6 col-sm-12">
+                <input type="text" class="form-control" placeholder="Apellido Paterno" name="appat" #appat="ngModel" [(ngModel)]="identity.appat_usuario" required pattern="[a-zA-Z]+">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-address-card"></span>
+                  </div>
+                </div>
+                <small *ngIf="!appat.valid && appat.touched" class="invalid-feedback d-block">EL apellido no es válido</small>
+              </div>
+              <div class="input-group mb-3 col-md-6 col-sm-12">
+                <input type="text" class="form-control" placeholder="Apellido Materno" name="apmat" #apmat="ngModel" [(ngModel)]="identity.apmat_usuario" required pattern="[a-zA-Z]+">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-address-card"></span>
+                  </div>
+                </div>
+                <small *ngIf="!apmat.valid && apmat.touched" class="invalid-feedback d-block">EL apellido no es válido</small>
+              </div>
+              <div class="input-group mb-3 col-md-6 col-sm-12">
+                <input type="number" class="form-control" placeholder="Telefono" name="telefono" #telefono="ngModel" [(ngModel)]="identity.tel_usuario" required>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-mobile-al"></span>
+                  </div>
+                  <small *ngIf="!telefono.valid && telefono.touched" class="invalid-feedback d-block">EL telefono no es válido</small>
+                </div>
+              </div>
+              <div class="input-group mb-3 col-md-6 col-sm-12">
+                <input type="text" class="form-control" placeholder="Estado" name="estado" required pattern="[a-zA-Z]+">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-map-marker-alt"></span>
+                  </div>
+                </div>
+                <!-- <small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">EL estado no es válido</small> -->
+              </div>
+              <div class="input-group mb-3 col-md-6 col-sm-12">
+                <input type="text" class="form-control" placeholder="Municipio" name="municipio" required pattern="[a-zA-Z]+">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-map-marker-alt"></span>
+                  </div>
+                </div>
+                <!-- <small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">EL municipio no es válido</small> -->
+              </div>
+              <div class="input-group mb-3 col-md-6 col-sm-12">
+                <input type="text" class="form-control" placeholder="Colonia" name="colonia" required pattern="[a-zA-Z]+">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-map-marker-alt"></span>
+                  </div>
+                  <!-- <small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">EL colonia no es válido</small> -->
+                </div>
+              </div>
+              <div class="input-group mb-3 col-md-6 col-sm-12">
+                <input type="text" class="form-control" placeholder="Codigo Postal" name="cp">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-map-marker-alt"></span>
+                  </div>
+                </div>
+                <!-- <small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">EL Codigo Postal no es válido</small> -->
+              </div>
+              <div class="input-group mb-3 col-md-6 col-sm-12">
+                <input type="text" class="form-control" placeholder="Dirección" name="direccion">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-map-marker-alt"></span>
+                  </div>
+                </div>
+                <!-- <small *ngIf="!correo.valid && correo.touched" class="invalid-feedback d-block">La dirección no es válido</small> -->
+              </div>
+              <div class="input-group mb-3 col-md-6 col-sm-12">
+                <input type="email" class="form-control" placeholder="Correo Electronico" name="correo" #correo="ngModel" [(ngModel)]="identity.email_usuario" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-envelope"></span>
+                  </div>
+                </div>
+                <small *ngIf="!correo.valid && correo.touched" class="invalid-feedback d-block">EL correo no es válido</small>
+              </div>
+
+
+              <div class="input-group mb-12 col-md-12">
+                <div *ngIf="identity && identity.image">
+                  {{identity.image}}
+                  <img src="{‌{ url + 'usuario/avatar/' + identity.image }" alt="" class="avatar-edit" />
+                </div>
+                <label for="image">Imagen</label>
+                <angular-file-uploader  name="fileUpload1" #fileUpload1="ngModel" [(ngModel)]="identity.image"
+                [config]="afuConfig"
+                [resetUpload]="true"
+                (ApiResponse)="avatarUpload($event)" >
+                </angular-file-uploader>
+
+                <!-- <small *ngIf="!correo.valid && correo.touched" class="invalid-feedback d-block">EL correo no es válido</small> -->
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-4">
+              </div>
+              <!-- /.col -->
+              <div class="col-4">
+                <button type="submit" class="btn btn-warning btn-block my-3" >Guardar</button>
+              </div>
+              <!-- /.col -->
+            </div>
+          </form>
+                </div>
+
+              </div>
+            </div>
+            </div>
+            </div>
+
+
+</div>
+
+
+
+    </section>
+    <!-- /.content -->
+  </div>
+
+
+

@@ -1,0 +1,133 @@
+<div class="container mt-5">
+
+      <div class="card">
+        <div class="card-body register-card-body">
+          <p class="login-box-msg">Modifica tus datos personales de usuario</p>
+
+          <form #detalleForm="ngForm" (ngSubmit)="onSubmit(detalleForm)">
+            <div class="row">
+
+              <div class="input-group mb-3 col-md-4">
+                <input type="text" class="form-control" placeholder="Nombre" name="nombre" #nombre="ngModel" [(ngModel)]="usuario.nombre_usuario" required pattern="[a-zA-Z]+">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+                <small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">EL nombre no es válido</small>
+              </div>
+              <div class="input-group mb-3 col-md-4">
+                <input type="text" class="form-control" placeholder="Apellido Paterno" name="appat" #appat="ngModel" [(ngModel)]="usuario.appat_usuario" required pattern="[a-zA-Z]+">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+                <small *ngIf="!appat.valid && appat.touched" class="invalid-feedback d-block">EL apellido no es válido</small>
+              </div>
+              <div class="input-group mb-3 col-md-4">
+                <input type="text" class="form-control" placeholder="Apellido Materno" name="apmat" #apmat="ngModel" [(ngModel)]="usuario.apmat_usuario" required pattern="[a-zA-Z]+">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+                <small *ngIf="!apmat.valid && apmat.touched" class="invalid-feedback d-block">EL apellido no es válido</small>
+              </div>
+              <div class="input-group mb-3 col-md-4">
+                <input type="number" class="form-control" placeholder="Telefono" name="telefono" #telefono="ngModel" [(ngModel)]="usuario.tel_usuario" required>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                  <small *ngIf="!telefono.valid && telefono.touched" class="invalid-feedback d-block">EL telefono no es válido</small>
+                </div>
+              </div>
+              <div class="input-group mb-3 col-md-4">
+                <input type="text" class="form-control" placeholder="Estado" name="estado" required pattern="[a-zA-Z]+">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+                <!-- <small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">EL estado no es válido</small> -->
+              </div>
+              <div class="input-group mb-3 col-md-4">
+                <input type="text" class="form-control" placeholder="Municipio" name="municipio" required pattern="[a-zA-Z]+">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+                <!-- <small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">EL municipio no es válido</small> -->
+              </div>
+              <div class="input-group mb-3 col-md-4">
+                <input type="text" class="form-control" placeholder="Colonia" name="colonia" required pattern="[a-zA-Z]+">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                  <!-- <small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">EL colonia no es válido</small> -->
+                </div>
+              </div>
+              <div class="input-group mb-3 col-md-4">
+                <input type="text" class="form-control" placeholder="Codigo Postal" name="cp">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+                <!-- <small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">EL Codigo Postal no es válido</small> -->
+              </div>
+              <div class="input-group mb-3 col-md-4">
+                <input type="text" class="form-control" placeholder="Dirección" name="direccion">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+                <!-- <small *ngIf="!correo.valid && correo.touched" class="invalid-feedback d-block">La dirección no es válido</small> -->
+              </div>
+              <div class="input-group mb-3 col-md-4">
+                <input type="email" class="form-control" placeholder="Correo Electronico" name="correo" #correo="ngModel" [(ngModel)]="usuario.email_usuario" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-envelope"></span>
+                  </div>
+                </div>
+                <small *ngIf="!correo.valid && correo.touched" class="invalid-feedback d-block">EL correo no es válido</small>
+              </div>
+              <div class="input-group mb-3 col-md-4">
+                <div *ngIf="identity && identity.image">
+                  {{identity.image}}
+                  <img src="{‌{ url + 'usuario/avatar/' + identity.image }" alt="" class="avatar-edit" />
+                </div>
+                <label for="image">Imagen</label>
+                <angular-file-uploader #fileUpload1
+                [config]="afuConfig"
+                [resetUpload]="true"
+                (ApiResponse)="avatarUpload($event)" >
+                </angular-file-uploader>
+
+                <!-- <small *ngIf="!correo.valid && correo.touched" class="invalid-feedback d-block">EL correo no es válido</small> -->
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-4">
+              </div>
+              <!-- /.col -->
+              <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block" >Guardar</button>
+              </div>
+              <!-- /.col -->
+            </div>
+          </form>
+
+        </div>
+        <!-- /.form-box -->
+      </div><!-- /.card -->
+</div>
+
+
+

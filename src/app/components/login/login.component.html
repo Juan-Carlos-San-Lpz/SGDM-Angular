@@ -1,0 +1,54 @@
+<body class="hold-transition login-page">
+
+  <div class="login-box">
+  <div class="register-logo">
+    <a [routerLink] = "['/inicio']"><b>BAKKIHEIM</b></a>
+  </div>
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Inicio de Sesion</p>
+
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Correo Electronico" name="correo" #correo="ngModel" [(ngModel)]="usuario.email_usuario" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+            <small *ngIf="!correo.valid && correo.touched" class="invalid-feedback d-block">El correo no es válido</small>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Password" name="password" #password="ngModel" [(ngModel)]="usuario.password" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+              <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">Password incorrecto</small>
+            </div>
+          </div>
+          <div class="row">
+
+            <!-- /.col -->
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">Iniciar Sesion</button>
+            </div>
+
+            <!-- /.col -->
+          </div>
+        </form>
+
+        <!-- /.social-auth-links -->
+
+        <p class="mb-1">
+          <a href="forgot-password.html">Olvido su caontraseña</a>
+        </p>
+        <p class="mb-0">
+          <a [routerLink] = "['/registro']" class="text-center">Registra nuevo usuario</a>
+        </p>
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+  </div>
+</body>

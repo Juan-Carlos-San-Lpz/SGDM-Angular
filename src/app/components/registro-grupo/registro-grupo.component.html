@@ -1,0 +1,358 @@
+<menu></menu>
+<barralateral></barralateral>
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Listado de Grupos</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Blank Page</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12 text-right">
+            <button class="btn btn-success" data-toggle='modal' data-target='#modalRegistrarAlumno'
+              (click)="open(modalRegistro)"> <i class="fas fa-plus-circle"></i> Registrar Usuario </button>
+          </div>
+        </div>
+        <br>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Tabla Usuarios</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+
+            <div class="table-responsive">
+              <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                class="table table-striped table-bordered row-border hover display responsive nowrap" cellSpacing="0"
+                width="100%">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Imagen</th>
+                    <th>Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor='let grupo of data'>
+                    <td>{{grupo.id_grupo_musica}}</td>
+                    <td>{{grupo.nombre_grupo_musica}}</td>
+                    <td>{{grupo.no_integrantes}}</td>
+                    <td>{{grupo.id_genero_grupo}}</td>
+                    <td>{{grupo.historia_grupo}}</td>
+                    <td><img src="{{url + '/grupo/cartel/' + grupo.imagen_grupo }}" class="avatar_edit"
+                        alt="Cartel grupo">
+                    </td>
+                    <td> <button class='editar btn btn-warning' title="Editar Datos" (click)="onUpdate(grupo)"
+                        (click)="open(modalModificar)"><i class="fa fa-edit"></i></button>&nbsp;
+                      <button class='eliminar btn btn-danger' title="Eliminar  Registro" (click)="onDelete(grupo)"
+                        (click)="open(modalEliminar)"><i class="far fa-trash-alt"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL REGISTRO -->
+
+    <ng-template #modalRegistro let-modal>
+      <div class="modal-content modal-lg">
+        <div class="card-success">
+          <div class="card-header">
+            <div class="d-sm-flex align-items-center justify-content-between ">
+              <h4 class="card-title">Usuarios </h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <!---->
+
+          </div>
+
+
+
+          <!-- Main content -->
+          <section class="content">
+
+            <div class="container">
+
+              <p class="login-box-msg">Registro de nuevo Grupo Musical</p>
+
+              <form #registroGrupoForm="ngForm" (ngSubmit)="onSubmit(registroGrupoForm)" enctype="multipart/form-data">
+                <div class="row">
+
+                  <div class="input-group mb-3 col-md-4">
+                    <input type="text" class="form-control" placeholder="Nombre Grupo Musical" name="nombreGrupo"
+                      #nombreGrupo="ngModel" [(ngModel)]="grupo.nombre_grupo_musica" required pattern="[a-zA-Z ]+">
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                      </div>
+                    </div>
+                    <small *ngIf="!nombreGrupo.valid && nombreGrupo.touched" class="invalid-feedback d-block">EL
+                      nombre no es
+                      válido</small>
+                  </div>
+                  <div class="input-group mb-3 col-md-4">
+                    <input type="number" class="form-control" placeholder="No. Integrantes" name="noIntegrantes"
+                      #noIntegrantes="ngModel" [(ngModel)]="grupo.no_integrantes" required>
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-address-card"></span>
+                      </div>
+                    </div>
+                    <small *ngIf="!noIntegrantes.valid && noIntegrantes.touched" class="invalid-feedback d-block">El
+                      numero de
+                      integrantes no es valido</small>
+                  </div>
+                  <div class="input-group mb-3 col-md-4">
+
+                    <select class="form-control" name="generoGrup" #generoGrup="ngModel"
+                      [(ngModel)]="grupo.id_genero_grupo" required>
+
+                      <option value="" selected>Seleccione un Genero</option>
+
+                      <option [value]="generoGrup.id_genero_grupo" *ngFor="let generoGrup of dataGenero" selected>
+                        {{generoGrup.nombre_genero}}
+                      </option>
+
+                    </select>
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-address-card"></span>
+                      </div>
+                    </div>
+                    <small *ngIf="!generoGrup.valid && generoGrup.touched" class="invalid-feedback d-block">EL
+                      Genero musical no es valido</small>
+                  </div>
+                  <div class="input-group mb-3 col-md-4">
+                    <input type="text" class="form-control" placeholder="Escribe la Historia del grupo" name="historia"
+                      #historia="ngModel" [(ngModel)]="grupo.historia_grupo" required>
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-mobile-alt"></span>
+                      </div>
+                      <small *ngIf="!historia.valid && historia.touched" class="invalid-feedback d-block">La historia
+                        no es
+                        valida</small>
+                    </div>
+                  </div>
+                  <div class="input-group mb-3 col-md-4">
+                    <input type="number" class="form-control" placeholder="Precio por Hora" name="precio"
+                      #precio="ngModel" [(ngModel)]="grupo.precio_grupo" required>
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-map-marker-alt"></span>
+                      </div>
+                    </div>
+                    <small *ngIf="!precio.valid && precio.touched" class="invalid-feedback d-block">EL precio no es
+                      valido</small>
+                  </div>
+
+                  <div class="input-group mb-12 col-md-12">
+
+                    <label for="image">Imagen</label>
+                    <angular-file-uploader name="fileUpload1" #fileUpload1="ngModel" [(ngModel)]="grupo.imagen_grupo"
+                      [config]="afuConfig" [resetUpload]="true" (ApiResponse)="CartelUpload($event)">
+                    </angular-file-uploader>
+
+                    <!-- <small *ngIf="!correo.valid && correo.touched" class="invalid-feedback d-block">EL correo no es válido</small> -->
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-4">
+                    <button type="submit" class="btn btn-success btn-block my-3"
+                      [disabled]="registroGrupoForm.invalid">Registrar</button>
+                  </div>
+                  <!-- /.col -->
+                </div>
+              </form>
+
+
+            </div>
+
+
+          </section>
+
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- FIN MODAL REGISTRO -->
+
+    <!-- MODAL MODIFICAR -->
+
+    <ng-template #modalModificar let-modal>
+      <div class="modal-content">
+        <div class="card-warning">
+          <div class="card-header">
+            <div class="d-sm-flex align-items-center justify-content-between ">
+              <h4 class="card-title">Usuarios </h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <!---->
+
+          </div>
+          <form #detalleGrupo="ngForm" (ngSubmit)="onSubmitUpdate(detalleGrupo)" enctype="multipart/form-data">
+            <div class="row mt-3">
+              <input type="hidden" class="form-control" placeholder="id" name="id" #id="ngModel"
+                [(ngModel)]="grupo.id_grupo_musica">
+
+              <div class="input-group mb-3 col-md-4">
+                <input type="text" class="form-control" placeholder="Nombre Grupo Musical" name="nombreGrupo"
+                  #nombreGrupo="ngModel" [(ngModel)]="grupo.nombre_grupo_musica" required pattern="[a-zA-Z ]+">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+                <small *ngIf="!nombreGrupo.valid && nombreGrupo.touched" class="invalid-feedback d-block">EL
+                  nombre no es
+                  válido</small>
+              </div>
+              <div class="input-group mb-3 col-md-4">
+                <input type="number" class="form-control" placeholder="No. Integrantes" name="noIntegrantes"
+                  #noIntegrantes="ngModel" [(ngModel)]="grupo.no_integrantes" required>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-address-card"></span>
+                  </div>
+                </div>
+                <small *ngIf="!noIntegrantes.valid && noIntegrantes.touched" class="invalid-feedback d-block">El
+                  numero de
+                  integrantes no es valido</small>
+              </div>
+              <div class="input-group mb-3 col-md-4">
+                <select class="form-control" name="generoGrup" #generoGrup="ngModel" [(ngModel)]="grupo.id_genero_grupo"
+                  required>
+
+                  <option [value]="generoGrup.id_genero_grupo" *ngFor="let generoGrup of dataGenero">
+                    {{generoGrup.nombre_genero}}
+                  </option>
+
+                </select>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-address-card"></span>
+                  </div>
+                </div>
+                <small *ngIf="!generoGrup.valid && generoGrup.touched" class="invalid-feedback d-block">EL
+                  Genero
+                  musical no es valido</small>
+              </div>
+              <div class="input-group mb-3 col-md-4">
+                <input type="text" class="form-control" placeholder="Escribe la Historia del grupo" name="historia"
+                  #historia="ngModel" [(ngModel)]="grupo.historia_grupo" required>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-mobile-alt"></span>
+                  </div>
+                  <small *ngIf="!historia.valid && historia.touched" class="invalid-feedback d-block">La historia
+                    no es
+                    valida</small>
+                </div>
+              </div>
+              <div class="input-group mb-3 col-md-4">
+                <input type="number" class="form-control" placeholder="Precio por Hora" name="precio" #precio="ngModel"
+                  [(ngModel)]="grupo.precio_grupo" required>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-map-marker-alt"></span>
+                  </div>
+                </div>
+                <small *ngIf="!precio.valid && precio.touched" class="invalid-feedback d-block">EL precio no es
+                  valido</small>
+              </div>
+
+              <div class="input-group mb-12 col-md-12">
+
+                <label for="image">Imagen</label>
+                <angular-file-uploader name="fileUpload1" #fileUpload1="ngModel" [(ngModel)]="grupo.imagen_grupo"
+                  [config]="afuConfig" [resetUpload]="true" (ApiResponse)="CartelUpload($event)">
+                </angular-file-uploader>
+
+                <!-- <small *ngIf="!correo.valid && correo.touched" class="invalid-feedback d-block">EL correo no es válido</small> -->
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-4">
+              </div>
+              <!-- /.col -->
+              <div class="col-4">
+                <button type="submit" (click)="modal.dismiss('Cross click')"
+                  class="btn btn-warning btn-block my-3">Guardar</button>
+              </div>
+              <!-- /.col -->
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- FIN MODAL MODIFICAR -->
+
+    <!-- MODAL ELIMINAR -->
+
+    <ng-template #modalEliminar let-modal>
+      <div class="modal-content">
+        <div class="modal-header bg-danger">
+          <h5 class="modal-title" id="exampleModalLabel">Eliminar Registro</h5>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <form #detalleForm="ngForm" (ngSubmit)="onSubmitDelete(detalleForm)">
+          <input type="hidden" class="form-control" placeholder="id" name="id" #id="ngModel"
+            [(ngModel)]="grupo.id_grupo_musica">
+          <input type=" text" hidden id="idEliminarAlumno" name="idEliminarAlumno">
+          <div class="modal-body text-center text-danger">¿Realmente deseas eliminar Usuario?</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal"
+              (click)="modal.dismiss('Cross click')">Cancelar</button>
+            <button class="btn btn-danger" type="submit" (click)="modal.dismiss('Cross click')">Eliminar</button>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+
+    <!-- FIN MODAL ELIMINAR -->
+
+
+
+
+  </section>
+  <!-- /.content -->
+</div>

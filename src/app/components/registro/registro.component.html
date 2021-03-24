@@ -1,0 +1,184 @@
+<div class="container mt-5">
+
+  <p class="login-box-msg">Registro de nuevo usuario</p>
+
+  <form #registroForm="ngForm" (ngSubmit)="onSubmit(registroForm)" enctype="multipart/form-data">
+    <div class="row">
+
+      <div class="input-group mb-3 col-md-4">
+        <label>Elige un Estado</label>
+        <input type="text" class="form-control" placeholder="Nombre" name="nombre" #nombre="ngModel"
+          [(ngModel)]="usuario.nombre_usuario" required pattern="[a-zA-Z]+">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-user"></span>
+          </div>
+        </div>
+        <small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">EL nombre no es válido</small>
+      </div>
+      <div class="input-group mb-3 col-md-4">
+        <label>Elige un Estado</label>
+        <input type="text" class="form-control" placeholder="Apellido Paterno" name="appat" #appat="ngModel"
+          [(ngModel)]="usuario.appat_usuario" required pattern="[a-zA-Z]+">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-address-card"></span>
+          </div>
+        </div>
+        <small *ngIf="!appat.valid && appat.touched" class="invalid-feedback d-block">EL apellido no es válido</small>
+      </div>
+      <div class="input-group mb-3 col-md-4">
+        <label>Elige un Estado</label>
+        <input type="text" class="form-control" placeholder="Apellido Materno" name="apmat" #apmat="ngModel"
+          [(ngModel)]="usuario.apmat_usuario" required pattern="[a-zA-Z]+">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-address-card"></span>
+          </div>
+        </div>
+        <small *ngIf="!apmat.valid && apmat.touched" class="invalid-feedback d-block">EL apellido no es válido</small>
+      </div>
+      <div class="input-group mb-3 col-md-4">
+        <label>Elige un Estado</label>
+        <input type="number" class="form-control" placeholder="Telefono" name="telefono" #telefono="ngModel"
+          [(ngModel)]="usuario.tel_usuario" required>
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-mobile-alt"></span>
+          </div>
+          <small *ngIf="!telefono.valid && telefono.touched" class="invalid-feedback d-block">EL telefono no es
+            válido</small>
+        </div>
+      </div>
+
+
+
+      <div class="input-group mb-3 col-md-4">
+        <label>Elige un Estado</label>
+
+        <select class="form-control" name="estado" #estado="ngModel" [(ngModel)]="direccion.estado"
+          (change)="onMunicipio(estado)">
+
+          <option [value]="estado" *ngFor="let estado of dataEstado">{{estado}}</option>
+
+        </select>
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-map-marker-alt"></span>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="input-group mb-3 col-md-4">
+        <label>Elige un Estado</label>
+        <select class="form-control" name="municipio" #municipio="ngModel" [(ngModel)]="direccion.municipio"
+          (change)="onCP(municipio)">
+
+          <option [value]="municipio" *ngFor="let municipio of dataMunicipio">{{municipio}}
+          </option>
+        </select>
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-map-marker-alt"></span>
+          </div>
+        </div>
+        <!-- <small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">EL municipio no es válido</small> -->
+      </div>
+      <div class="input-group mb-3 col-md-4">
+        <label>Elige un Estado</label>
+        <select class="form-control" name="cp" #cp="ngModel" [(ngModel)]="direccion.cp" (change)="onColonia(cp)">
+
+          <option [value]="cp" *ngFor="let cp of dataCp">{{cp}}
+          </option>
+        </select>
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-map-marker-alt"></span>
+          </div>
+          <!-- <small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">EL colonia no es válido</small> -->
+        </div>
+      </div>
+      <div class="input-group mb-3 col-md-4">
+        <label>Elige un Estado</label>
+        <select class="form-control" name="colonia" #colonia="ngModel" [(ngModel)]="direccion.colonia">
+
+          <option [value]="colonia" *ngFor="let colonia of dataColonia">{{colonia}}
+          </option>
+        </select>
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-map-marker-alt"></span>
+          </div>
+        </div>
+        <!-- <small *ngIf="!nombre.valid && nombre.touched" class="invalid-feedback d-block">EL Codigo Postal no es válido</small> -->
+      </div>
+      <div class="input-group mb-3 col-md-4">
+        <label>Elige un Estado</label>
+        <input type="text" class="form-control" placeholder="Dirección" name="direccion"
+          [(ngModel)]="direccion.direccion">
+        <input type="hidden" class="form-control" placeholder="idUser" name="idUser" [(ngModel)]="direccion.id_usuario"
+          value={{identity.sub}}>
+
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-map-marker-alt"></span>
+          </div>
+        </div>
+        <!-- <small *ngIf="!correo.valid && correo.touched" class="invalid-feedback d-block">La dirección no es válido</small> -->
+      </div>
+
+      <div class="input-group mb-3 col-md-4">
+        <label>Elige un Estado</label>
+        <input type="email" class="form-control" placeholder="Correo Electronico" name="correo" #correo="ngModel"
+          [(ngModel)]="usuario.email_usuario" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-envelope"></span>
+          </div>
+        </div>
+        <small *ngIf="!correo.valid && correo.touched" class="invalid-feedback d-block">EL correo no es válido</small>
+      </div>
+      <div class="input-group mb-3 col-md-4">
+        <label>Elige un Estado</label>
+        <input type="password" class="form-control" placeholder="Password" name="password" #password="ngModel"
+          [(ngModel)]="usuario.password" required>
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-lock"></span>
+          </div>
+          <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">Password
+            incorrecto</small>
+        </div>
+      </div>
+      <div class="input-group mb-3 col-md-4">
+        <label>Elige un Estado</label>
+        <input type="password" class="form-control" placeholder="Confirma password">
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-lock"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+      </div>
+      <!-- /.col -->
+      <div class="col-4">
+        <button type="submit" class="btn btn-success btn-block my-3"
+          [disabled]="registroForm.invalid">Registrar</button>
+      </div>
+      <!-- /.col -->
+    </div>
+  </form>
+  <!-- <div class="row justify-content-around">
+    <div class="col-9">
+     <a [routerLink] = "['/login']" class="text-center">Ya tengo una cuenta</a>
+    </div>
+    <div class="col-3">
+      <a href="login.html" class="text-right">Registra una Banda</a>
+    </div>
+  </div> -->
+
+</div>
